@@ -61,3 +61,18 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "devise", "~> 4.9"
+
+gem "rspec-rails", group: [ :development, :test ]
+gem "factory_bot_rails", group: [ :development, :test ]
+gem "faker", group: [ :development, :test ]
+
+gem "jsonapi-serializer"
+
+gem "jsbundling-rails"
+
+gem "sidekiq"
+
+gem "faraday"
+gem "faraday_middleware"
