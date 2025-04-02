@@ -1,0 +1,14 @@
+<!-- app/views/messages/_message.html.erb -->
+<div class="mb-4 <%= message.role == 'user' ? 'text-right' : '' %>" id="<%= dom_id(message) %>">
+  <div class="inline-block max-w-3/4 p-3 rounded <%= message.role == 'user' ? 'bg-blue-100' : 'bg-white border' %>">
+    <div class="text-sm font-bold mb-1">
+      <%= message.role == 'user' ? 'You' : 'Fin' %>
+    </div>
+    <div class="text-gray-800">
+      <%= simple_format message.content %>
+    </div>
+    <div class="text-xs text-gray-500 mt-1">
+      <%= message.created_at.strftime('%l:%M %p') %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<!-- app/views/messages/create.turbo_stream.erb -->
+<%= turbo_stream.append "messages" do %>
+  <%= render 'messages/message', message: @message %>
+<% end %>
+
+<%= turbo_stream.append "messages" do %>
+  <%= render 'messages/message', message: @response %>
+<% end %>
+
+<%= turbo_stream.target "new_message" do %>
+  <%= form_with model: [@conversation, FinMessage.new],
+                local: false,
+                html: { class: "flex" } do |f| %>
+    <%= f.text_field :content,
+                     class: "flex-grow px-3 py-2 border rounded-l focus:outline-none",
+                     placeholder: "Ask Fin something...",
+                     autocomplete: "off" %>
+    <%= f.submit "Send", class: "bg-blue-500 text-white px-4 py-2 rounded-r" %>
+  <% end %>
+<% end %>

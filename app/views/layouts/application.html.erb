@@ -1,28 +1,52 @@
+<!-- app/views/layouts/application.html.erb -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Cashly V2" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Cashly</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= yield :head %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+<body>
+<header class="bg-blue-600 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Cashly</h1>
+    <nav>
+      <% if user_signed_in? %>
+        <%= link_to "Conversations", conversations_path, class: "mx-2" %>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "mx-2" %>
+      <% else %>
+        <%= link_to "Sign In", new_user_session_path, class: "mx-2" %>
+        <%= link_to "Sign Up", new_user_registration_path, class: "mx-2" %>
+      <% end %>
+    </nav>
+  </div>
+</header>
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+<main class="container mx-auto mt-6 px-4">
+  <% if notice %>
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+      <%= notice %>
+    </div>
+  <% end %>
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <% if alert %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <%= alert %>
+    </div>
+  <% end %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= yield %>
+</main>
+
+<footer class="mt-12 p-4 bg-gray-100">
+  <div class="container mx-auto text-center text-gray-600">
+    &copy; <%= Date.today.year %> Cashly - AI-First Financial Intelligence
+  </div>
+</footer>
+</body>
 </html>

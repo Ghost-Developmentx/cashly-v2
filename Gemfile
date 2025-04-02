@@ -78,3 +78,5 @@ gem "faraday"
 gem "faraday_middleware"
 
 gem "jsonb", "~> 0.0.1"
+
+gem "omniauth", "~> 2.1"
